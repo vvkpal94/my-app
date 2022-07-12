@@ -1,25 +1,73 @@
-import logo from './logo.svg';
+import FeaturedProducts from './FeaturedProducts';
 import './App.css';
+import React, { useState } from 'react'; 
+import { Button } from './Button.js'; 
+import { ListComponent } from './ListComponent.js'; 
+
+
 
 function App() {
+  const [components, setComponents] = useState(["Monday"]);
+  const [componentNames, ] = useState(["Tuesday","wednesday","thursday","friday","saurday","sunday"]);
+
+  function addComponent() {
+    if (componentNames.length > 0) { 
+      
+      setComponents([...components, componentNames[0]]);
+      componentNames.splice(0, 1);
+      
+    } else { 
+      
+      window.alert("No more days to add!");
+      
+    } 
+    
+  } 
+    
+    
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <React.Fragment>
+    <div className='App'>
+      <FeaturedProducts />
     </div>
+
+<div> 
+    <Button onClick={addComponent} text="Add"/>
+    <div>
+      <ul>
+        
+      
+      {components.map((item, i) => (<li>
+        <div classnme="card-container" style={{
+          width:"25%",
+          height:"25%",
+
+          
+          border:"solid 3px #d3d3d3",
+          margin:"10px"
+        }}>
+        
+        
+         <ListComponent text={item} />
+         </div>
+         </li>
+      ))}
+
+      </ul>
+      
+    
+      </div>
+    
+</div>
+
+
+
+
+
+
+</React.Fragment>
+
   );
 }
-
 export default App;
